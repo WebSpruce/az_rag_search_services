@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>az_rag_note_search</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Asp.Versioning.Http" Version="10.2.2" />
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="10.2.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\az_rag_search_services.Domain\az_rag_search_services.Domain.csproj" />
+      <ProjectReference Include="..\az_rag_search_services.Infrastructure\az_rag_search_services.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
