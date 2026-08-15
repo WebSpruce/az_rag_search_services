@@ -1,12 +1,13 @@
 using Asp.Versioning;
 using az_rag_search_services.ApiNoteRagSearch.Endpoints;
+using az_rag_search_services.Application.Common.Interfaces;
 using az_rag_search_services.Infrastructure;
 
 namespace az_rag_search_services.ApiNoteRagSearch;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Logging.ClearProviders();
@@ -44,6 +45,12 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+        
+        using (var scope = app.Services.CreateScope())
+        {
+            var cosmosService = scope.ServiceProvider.GetRequiredService<IAzureCosmosDbService>();                                   
+            await cosmosService.InitializeAsync(); 
+        }
         
         app.MapEndpoints();
 
