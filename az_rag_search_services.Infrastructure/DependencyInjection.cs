@@ -1,6 +1,6 @@
 using az_rag_search_services.Application.Common.Interfaces;
 using az_rag_search_services.Infrastructure.Persistence.Repositories;
-using az_rag_search_services.Intrastructure.Data;
+using az_rag_search_services.Infrastructure.Persistence.Services;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -61,6 +61,7 @@ public static class DependencyInjection
 
         services.AddSingleton<IAzureCosmosDbService, AzureCosmosDbService>();
         services.AddScoped<INoteRepository, NoteRepository>();
+        services.AddHttpClient<IEmbeddingService, OllamaEmbeddingService>();
         
         return services;
     }

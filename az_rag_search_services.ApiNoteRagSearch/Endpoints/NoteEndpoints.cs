@@ -42,8 +42,20 @@ public class NoteEndpoints : IModule
                 return Results.NotFound();                                                                                           
             }                                                                                                                        
         })                                                                                                                           
-        .Produces<GetNoteByIdResult>(StatusCodes.Status200OK)                                                                        
+        .Produces<GetNoteByIdResult>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status404NotFound);      
+        
+        notes.MapPost("/search", async (                                                                                             
+                SearchNotesByVectorQuery query,                                                                                          
+                IQueryHandler<SearchNotesByVectorQuery, SearchNotesByVectorResult> handler,                                              
+                CancellationToken token                                                                                                  
+            ) =>                                                                                                                     
+            {                                                                                                                            
+                var result = await handler.Handle(query, token);                                                                         
+                return Results.Ok(result);                                                                                               
+            })                                                                                                                           
+            .Produces<SearchNotesByVectorResult>(StatusCodes.Status200OK)                                                                
+            .WithName("SearchNotesByVector");    
         
         notes.MapPatch("", async (
             

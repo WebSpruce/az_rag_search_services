@@ -8,14 +8,16 @@ namespace az_rag_search_services.Application.Features.Note.Command;
 public class AddNoteCommandHandler : ICommandHandler<AddNoteCommand, AddNoteResult>
 {
     private readonly INoteRepository _noteRepository;
+    private readonly IEmbeddingService _embeddingService;
     private readonly ILogger<AddNoteCommandHandler> _logger;
     private readonly IValidator<AddNoteCommand> _validator;
 
-    public AddNoteCommandHandler(INoteRepository noteRepository, ILogger<AddNoteCommandHandler> logger, IValidator<AddNoteCommand> validator)
+    public AddNoteCommandHandler(INoteRepository noteRepository, ILogger<AddNoteCommandHandler> logger, IValidator<AddNoteCommand> validator, IEmbeddingService embeddingService)
     {
         _noteRepository = noteRepository;
         _logger = logger;
         _validator = validator;
+        _embeddingService = embeddingService;
     }
 
     public async Task<AddNoteResult> Handle(AddNoteCommand request, CancellationToken cancellationToken)
@@ -35,6 +37,8 @@ public class AddNoteCommandHandler : ICommandHandler<AddNoteCommand, AddNoteResu
 
         var note = new Domain.Entities.Note(request.Content);
 
+        note.VectorEmbedding = await _embeddingService.GenerateEmbeddingAsync(note.Content, EmbeddingTaskType.Document, cancellationToken);
+        
         await _noteRepository.AddAsync(note);
 
         _logger.LogInformation("AddNoteCommandHandler Handle Completed");

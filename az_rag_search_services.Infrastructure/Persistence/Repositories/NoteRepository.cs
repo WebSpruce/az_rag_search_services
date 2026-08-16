@@ -44,6 +44,7 @@ public class NoteRepository : INoteRepository
         catch (Exception ex)
         {
             _logger.LogError($"NoteRepository AddAsync method: {ex.Message} - {ex.InnerException}");
+            throw;
         }
         finally
         {
@@ -56,14 +57,16 @@ public class NoteRepository : INoteRepository
         try
         {
             _logger.LogInformation($"NoteRepository SearchByVectorAsync Started");
+            
             // ReSharper disable LanguageInjection
-            var query = "SELECT TOP @limit * " +
-                        "FROM c " +
-                        "WHERE VectorDistance(c.vectorEmbedding, @embedding) < 0.5";
+            var query = $@"
+                SELECT TOP {limit} c.id, c.content, VectorDistance(c.vectorEmbedding, @vectorLiteral) AS SimilarityScore
+                FROM c
+                ORDER BY VectorDistance(c.vectorEmbedding, @vectorLiteral)";
+
             // ReSharper disable LanguageInjection
             var queryDefinition = new QueryDefinition(query)
-                .WithParameter("@limit", limit)
-                .WithParameter("@embedding", embedding);
+                .WithParameter("@vectorLiteral", embedding);
 
             var results = new List<Note>();
             using var iterator = _container.GetItemQueryIterator<Note>(queryDefinition);

@@ -4,7 +4,7 @@ using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace az_rag_search_services.Infrastructure.Persistence.Repositories;
+namespace az_rag_search_services.Infrastructure.Persistence.Services;
 
 public class AzureCosmosDbService : IAzureCosmosDbService
 {
