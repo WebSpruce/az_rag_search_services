@@ -1,7 +1,9 @@
 using Asp.Versioning;
 using az_rag_search_services.ApiNoteRagSearch.Endpoints;
+using az_rag_search_services.Application;
 using az_rag_search_services.Application.Common.Interfaces;
 using az_rag_search_services.Infrastructure;
+using Scalar.AspNetCore;
 
 namespace az_rag_search_services.ApiNoteRagSearch;
 
@@ -13,7 +15,9 @@ public class Program
         builder.Logging.ClearProviders();
         builder.Logging.AddConsole();
 
-        builder.Services.AddInfrastructure(builder.Configuration);
+        builder.Services
+            .AddApplication()
+            .AddInfrastructure(builder.Configuration);
 
         // Add services to the container.
         builder.Services.AddAuthorization();
@@ -40,6 +44,7 @@ public class Program
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.MapScalarApiReference();
         }
 
         app.UseHttpsRedirection();

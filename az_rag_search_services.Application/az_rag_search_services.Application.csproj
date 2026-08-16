@@ -14,10 +14,19 @@
       <Reference Include="Microsoft.Azure.Cosmos.Client">
         <HintPath>..\..\..\..\.nuget\packages\microsoft.azure.cosmos\3.62.1\lib\netstandard2.0\Microsoft.Azure.Cosmos.Client.dll</HintPath>
       </Reference>
+      <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+        <HintPath>..\..\..\..\.nuget\packages\microsoft.extensions.logging.abstractions\10.0.11\lib\net10.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\" />
+      <Folder Include="Abstraction\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="12.1.1" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+      <PackageReference Include="Scrutor" Version="7.0.0" />
     </ItemGroup>
 
 </Project>
