@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-az_rag_search_services.Worker-61307b8c-d014-4cf5-822c-9aed29c1a5c3</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.20.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.5"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\az_rag_search_services.Domain\az_rag_search_services.Domain.csproj" />
+    </ItemGroup>
+</Project>

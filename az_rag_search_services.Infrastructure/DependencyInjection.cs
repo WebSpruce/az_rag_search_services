@@ -1,6 +1,7 @@
 using az_rag_search_services.Application.Common.Interfaces;
 using az_rag_search_services.Infrastructure.Persistence.Repositories;
 using az_rag_search_services.Infrastructure.Persistence.Services;
+using Azure.Messaging.ServiceBus;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -59,6 +60,18 @@ public static class DependencyInjection
             });
         });
 
+        services.AddSingleton(sp =>
+        {
+            connectionString = configuration.GetConnectionString("ServiceBusConnectionString");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException(
+                    "Connection string 'ServiceBusConnectionString' is not configured. " +
+                    "Set CONNECTIONSTRINGS__ServiceBusConnectionString environment variable.");
+            }
+            return new ServiceBusClient(connectionString);
+        });
+        services.AddSingleton<IOrderMessageSender, ServiceBusOrderSender>();
         services.AddSingleton<IAzureCosmosDbService, AzureCosmosDbService>();
         services.AddScoped<INoteRepository, NoteRepository>();
         services.AddHttpClient<IEmbeddingService, OllamaEmbeddingService>();

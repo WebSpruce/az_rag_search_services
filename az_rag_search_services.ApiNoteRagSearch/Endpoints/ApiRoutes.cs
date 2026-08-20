@@ -13,6 +13,10 @@ public class ApiRoutes
     {
         public const string GroupName = $"{ApiBase}/notes";
     }
+    public static class Orders
+    {
+        public const string GroupName = $"{ApiBase}/orders";
+    }
     public static ApiVersionSet ApiVersion(IEndpointRouteBuilder app)
     {
         return app.NewApiVersionSet()
