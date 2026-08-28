@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "az_rag_search_services.Appl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "az_rag_search_services.Worker", "az_rag_search_services.Worker\az_rag_search_services.Worker.csproj", "{CF04901A-0D87-4B76-9810-FB924AA4AEE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "az_rag_search_services.Test", "az_rag_search_services.Test\az_rag_search_services.Test.csproj", "{423BFB52-E221-4ECA-BFF6-8CD5AD5534CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{CF04901A-0D87-4B76-9810-FB924AA4AEE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF04901A-0D87-4B76-9810-FB924AA4AEE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF04901A-0D87-4B76-9810-FB924AA4AEE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423BFB52-E221-4ECA-BFF6-8CD5AD5534CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423BFB52-E221-4ECA-BFF6-8CD5AD5534CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423BFB52-E221-4ECA-BFF6-8CD5AD5534CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423BFB52-E221-4ECA-BFF6-8CD5AD5534CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
